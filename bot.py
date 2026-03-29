@@ -36,44 +36,39 @@ def get_music_charts():
 def analyze_with_groq(trends, charts):
     today = datetime.now().strftime("%d.%m.%Y")
 
-    prompt = f"""Du analysierst Daten fuer einen Independent-Musiker (Denis) der seine Musik auf allen Streamingplattformen veroeffentlicht und auf TikTok viral gehen will. Ziel: Leute sollen seinen Sound als TikTok-Audio benutzen UND den Song privat streamen. Seine Musik transportiert verschiedene Emotionen - von humorvoll bis tiefgründig.
+    prompt = f"""KONTEXT: Du schreibst fuer Denis, Independent-Musiker. Er will seinen Sound auf TikTok viral bringen - Leute sollen ihn als Audio nutzen und dann auf Spotify streamen.
 
-GOOGLE TRENDS (AT/DE) - {today}:
-{trends[:2000]}
+AKTUELLE DATEN - {today}:
+Google Trends AT/DE: {trends[:2000]}
+Charts AT Top 10: {charts}
 
-MUSIC CHARTS AT Top 10:
-{charts}
+ABSOLUTE VERBOTE - wenn du das schreibst, hast du versagt:
+- "Nutze aktuelle Trends" (welche konkret?)
+- "Erstelle ansprechende Inhalte" (was genau?)
+- "Sei authentisch" (bedeutungslos)
+- "Verwende relevante Hashtags" (welche?)
+- Irgendwas mit "koennte" oder "vielleicht"
 
-Erstelle einen knallharten Tagesbericht. Sei extrem konkret - keine vagen Tipps, sondern exakte Video-Konzepte die ich heute umsetzen kann:
+DEIN JOB: 3 fertige Video-Konzepte liefern. Jedes Konzept so beschrieben dass Denis es HEUTE filmen kann ohne nachzudenken.
 
-🎯 SOUND-NUTZUNG PUSHEN
-Welche konkreten Video-Formate bringen Leute dazu meinen Sound zu benutzen?
-Nenne 3 spezifische Video-Konzepte (z.B. "POV: du bist der einzige auf der Party der guten Geschmack hat" + welche Emotion/Situation + warum das viral geht)
+Fuer jedes Video GENAU dieses Format:
 
-🔥 TREND-HIJACKING HEUTE
-Welche aktuellen TikTok-Trends aus den Google Trends kann ich mit meiner Musik verbinden?
-Fuer jeden Trend: exakter Video-Aufbau (Sekunde 0-3 Hook, Mitte, Ende), welches Gefuehl soll der Zuschauer haben
+VIDEO [Nummer]: [einpraegsamr Titel]
+Situation: [exakt was passiert im Video - eine Szene, ein Ort, eine Handlung]
+Hook (0-2 Sek): [exakter Text-Overlay oder gesprochener Satz - woertlich]
+Mitte: [was passiert, was sieht man, was steht im Text]
+Warum der Sound hier viral geht: [ein Satz - psychologischer Grund]
+Caption: [fertige Caption zum Copy-Pasten inkl. Call-to-Action]
 
-😂 HUMOR-KONZEPTE
-2-3 konkrete humorvolle Video-Ideen bei denen mein Sound der Witz ist
-Beschreibe exakt: Situation, Text-Overlay, Reaktion des Publikums
+---
 
-💔 EMOTIONALE HOOKS
-2 Video-Konzepte fuer ernstere/emotionale Songs
-Welche universelle menschliche Erfahrung wird getriggert? Wie baue ich den Hook in den ersten 2 Sekunden?
+Dann noch:
 
-📈 STREAMING KONVERSION
-Wie bringe ich TikTok-Zuschauer dazu den Song auch auf Spotify/Apple Music zu streamen?
-Konkrete Call-to-Action Formulierungen fuer die Caption
+🔥 TREND HEUTE: Nimm den groessten Trend aus den Google Trends oben. Erklaere in 2 Saetzen wie Denis diesen SPEZIFISCHEN Trend mit seiner Musik verbindet. Nicht allgemein - den konkreten Trend beim Namen nennen.
 
-#️⃣ HASHTAG-STRATEGIE
-10 Nischen-Hashtags (unter 500k Views - bessere Chancen zu tenden) + 5 grosse Hashtags
-Format: #hashtag (Begruendung warum heute relevant)
+#️⃣ HASHTAGS: 5 kleine (#unter500k) + 3 grosse. Nur die Liste, keine Erklaerung.
 
-⚡ EINE SACHE DIE HEUTE VIRAL GEHEN KANN
-Das konkreteste, am leichtesten umsetzbare Video-Konzept fuer heute - mit exaktem Skript
-
-Antworte auf Deutsch. Keine Markdown Formatierung, nur Emojis als Struktur. Maximal 3500 Zeichen."""
+Antworte auf Deutsch. Keine Markdown. Maximal 3500 Zeichen."""
 
     headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
@@ -85,7 +80,7 @@ Antworte auf Deutsch. Keine Markdown Formatierung, nur Emojis als Struktur. Maxi
         "messages": [
             {
                 "role": "system",
-                "content": "Du bist ein TikTok Virality Experte spezialisiert auf Musik-Marketing fuer Independent Artists. Du kennst genau wie Sound-Trends entstehen, warum Leute einen fremden Song benutzen, und wie man aus TikTok-Views Streams auf Spotify macht. Du denkst wie ein 22-jaehriger Creator der weiss was gerade funktioniert - nicht wie ein Marketing-Lehrbuch. Deine Ideen sind spezifisch, mutig und sofort umsetzbar."
+                "content": "Du bist ein TikTok Creator der selbst Musik viral gebracht hat. Du weisst: vage Tipps sind wertlos. Du lieferst nur konkrete, filmbare Video-Konzepte mit exaktem Wortlaut. Wenn du in Versuchung kommst etwas Allgemeines zu schreiben - schreib stattdessen ein konkretes Beispiel."
             },
             {
                 "role": "user",
