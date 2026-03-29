@@ -36,34 +36,44 @@ def get_music_charts():
 def analyze_with_groq(trends, charts):
     today = datetime.now().strftime("%d.%m.%Y")
 
-    prompt = f"""Analysiere folgende aktuelle Daten und erstelle eine TikTok Virality Strategie fuer einen Musiker der tanzbare Musik macht:
+    prompt = f"""Du analysierst Daten fuer einen Independent-Musiker (Denis) der seine Musik auf allen Streamingplattformen veroeffentlicht und auf TikTok viral gehen will. Ziel: Leute sollen seinen Sound als TikTok-Audio benutzen UND den Song privat streamen. Seine Musik transportiert verschiedene Emotionen - von humorvoll bis tiefgründig.
 
-GOOGLE TRENDS (AT/DE):
+GOOGLE TRENDS (AT/DE) - {today}:
 {trends[:2000]}
 
-MUSIC CHARTS (AT Top 10):
+MUSIC CHARTS AT Top 10:
 {charts}
 
-Datum: {today}
+Erstelle einen knallharten Tagesbericht. Sei extrem konkret - keine vagen Tipps, sondern exakte Video-Konzepte die ich heute umsetzen kann:
 
-Erstelle einen strukturierten Tagesbericht:
+🎯 SOUND-NUTZUNG PUSHEN
+Welche konkreten Video-Formate bringen Leute dazu meinen Sound zu benutzen?
+Nenne 3 spezifische Video-Konzepte (z.B. "POV: du bist der einzige auf der Party der guten Geschmack hat" + welche Emotion/Situation + warum das viral geht)
 
-🔥 TOP 5 TIKTOK TRENDS HEUTE
-(konkrete aktuelle Trends die ich heute nutzen kann)
+🔥 TREND-HIJACKING HEUTE
+Welche aktuellen TikTok-Trends aus den Google Trends kann ich mit meiner Musik verbinden?
+Fuer jeden Trend: exakter Video-Aufbau (Sekunde 0-3 Hook, Mitte, Ende), welches Gefuehl soll der Zuschauer haben
 
-💃 AI-INFLUENCER TANZ IDEEN
-(konkrete Choreographie-Konzepte - was fuer Moves, welcher Stil, wie geht der Trend viral?)
+😂 HUMOR-KONZEPTE
+2-3 konkrete humorvolle Video-Ideen bei denen mein Sound der Witz ist
+Beschreibe exakt: Situation, Text-Overlay, Reaktion des Publikums
 
-😂 MEME KONZEPTE
-(konkrete Meme-Ideen mit Beschreibung die viral gehen koennen)
+💔 EMOTIONALE HOOKS
+2 Video-Konzepte fuer ernstere/emotionale Songs
+Welche universelle menschliche Erfahrung wird getriggert? Wie baue ich den Hook in den ersten 2 Sekunden?
 
-#️⃣ BESTE HASHTAGS FUER HEUTE
-(15-20 relevante Hashtags)
+📈 STREAMING KONVERSION
+Wie bringe ich TikTok-Zuschauer dazu den Song auch auf Spotify/Apple Music zu streamen?
+Konkrete Call-to-Action Formulierungen fuer die Caption
 
-⚡ TOP 3 SOFORTMASSNAHMEN
-(was ich HEUTE noch umsetzen soll fuer maximale Reichweite)
+#️⃣ HASHTAG-STRATEGIE
+10 Nischen-Hashtags (unter 500k Views - bessere Chancen zu tenden) + 5 grosse Hashtags
+Format: #hashtag (Begruendung warum heute relevant)
 
-Sei sehr konkret und kreativ. Keine Markdown Formatierung, nur Emojis. Antworte auf Deutsch. Maximal 3000 Zeichen."""
+⚡ EINE SACHE DIE HEUTE VIRAL GEHEN KANN
+Das konkreteste, am leichtesten umsetzbare Video-Konzept fuer heute - mit exaktem Skript
+
+Antworte auf Deutsch. Keine Markdown Formatierung, nur Emojis als Struktur. Maximal 3500 Zeichen."""
 
     headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
@@ -75,7 +85,7 @@ Sei sehr konkret und kreativ. Keine Markdown Formatierung, nur Emojis. Antworte 
         "messages": [
             {
                 "role": "system",
-                "content": "Du bist ein Elite TikTok Marketing Stratege spezialisiert auf Musikvirality, AI Influencer Kampagnen und Meme Marketing. Gib immer konkrete, direkt umsetzbare Ideen - keine allgemeinen Tipps."
+                "content": "Du bist ein TikTok Virality Experte spezialisiert auf Musik-Marketing fuer Independent Artists. Du kennst genau wie Sound-Trends entstehen, warum Leute einen fremden Song benutzen, und wie man aus TikTok-Views Streams auf Spotify macht. Du denkst wie ein 22-jaehriger Creator der weiss was gerade funktioniert - nicht wie ein Marketing-Lehrbuch. Deine Ideen sind spezifisch, mutig und sofort umsetzbar."
             },
             {
                 "role": "user",
